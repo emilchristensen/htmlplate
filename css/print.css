@@ -1,0 +1,10 @@
+﻿@charset "utf-8";
+/* 
+  Project name
+  -------------
+  Print stylesheet
+*/
+a[href]:after {
+  content: " (" attr(href) ") ";
+  font-size: 90%;
+}

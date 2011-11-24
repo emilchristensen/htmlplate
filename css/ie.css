@@ -1,0 +1,13 @@
+﻿@charset "utf-8";
+/* 
+  Project name
+  -------------
+  IE Compatability Hacks
+*/
+
+/*=IE7*/
+*:first-child+html {}
+*:first-child+html .group { min-height: 1px; }
+/*=IE6*/
+* html {}
+* html .group { height: 1%; }
