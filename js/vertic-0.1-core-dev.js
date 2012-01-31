@@ -4,7 +4,6 @@
  *
  * Copyright 2012, Vertic A/S
  * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://jquery.org/license
  *
  * Date: Tue Jan 31 12:00:00 2012 +0200
  */
