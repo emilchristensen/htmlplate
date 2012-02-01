@@ -7,13 +7,12 @@
  *
  * Date: Tue Jan 31 12:00:00 2012 +0200
  */
-(function(jQuery,Modernizr){
+(function(jQuery){
 	// Set up object
 	var vertic = window._v;
 	
 	// Hook in to 3rd party libs
 	var $ = typeof jQuery !== 'undefined' ? jQuery : typeof window.jQuery !== 'undefined' ? window.jQuery : false;
-	var Modernizr = typeof Modernizr !== 'undefined' ? Modernizr : typeof window.Modernizr !== 'undefined' ? window.Modernizr : false;
 	
 	// Set up service utilities
 	vertic.services = {
