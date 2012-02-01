@@ -9,59 +9,49 @@
  */
 (function(jQuery,Modernizr){
 	// Set up object
-	var vertic = _v;
+	var vertic = window._v;
 	
-	// Set up services utilities
+	// Hook in to 3rd party libs
+	var $ = typeof jQuery !== 'undefined' ? jQuery : typeof window.jQuery !== 'undefined' ? window.jQuery : false;
+	var Modernizr = typeof Modernizr !== 'undefined' ? Modernizr : typeof window.Modernizr !== 'undefined' ? window.Modernizr : false;
+	
+	// Set up service utilities
 	vertic.services = {
-		ajax:function(url,data,complete,allowErr){
-		if (typeof data === 'undefined') data = {};
-			if (typeof allowErr === 'undefined') allowErr = false;
-			if (typeof complete === 'undefined') complete = function(resp){ try { console.log('autocb: '); console.log(resp) } catch (err) {} };
-			/*console.log("ajax call");
-			console.log(url);
-			console.log(data);
-			console.log(JSON.stringify(data));
-			console.log("ajax waiting");/**/
+		request:function(url,data,win,lose) {
+      if (typeof data !== 'object') data = {};
+			if (typeof win === 'undefined') var win = function(resp){ _v.log(resp); };
+			if (typeof lose === 'undefined') var lose = function(resp){ _v.err(resp); };
 			$.ajax({
 				url:url,
 				data:JSON.stringify(data),
 				dataType:'json',
 				type:'post',
 				complete:function(jqxhr,ts){
-					/*console.log("ajax return");
-					console.log(jqxhr);
-					console.log(ts);
-					console.log("ajax done");/**/
 					if (ts === "success") {
 						var resp = jqxhr.responseText;
 						if (resp) {
 							resp = JSON.parse(resp);
 							if (resp.Outcome.Success === true || allowErr) {
-								complete(resp);
+                _v.log(resp);
+								win(resp);
 							} else {
-								try { 
-									console.log('Service error: ' + jqxhr.responseText);
-								} catch (err) {}
+                _v.err(resp, 'Service error', jqxhr.responseText);
+								lose(resp);
 							}
 						} else {
-							try { 
-								console.log('Response format error: ' + resp);
-							} catch (err) {}
+              _v.err(jqxhr, 'Response format error', resp);
 						}
 					} else {
-						try { 
-							console.log('Ajax request error: ' + ts);
-						} catch (err) {}
+					  _v.err(jqxhr, 'Ajax request error', ts);
 					}
 				}
 			});
 		}
 	};
-	
-	// Hook in to 3rd party libs
-	var $ = typeof jQuery !== 'undefined' ? jQuery : typeof window.jQuery !== 'undefined' ? window.jQuery : false;
-	var Modernizr = typeof Modernizr !== 'undefined' ? Modernizr : typeof window.Modernizr !== 'undefined' ? window.Modernizr : false;
+  
+  // Shortcuts
+  vertic.request = function() { return vertic.services.request.apply(vertic.services.request,arguments); };
 	
 	// Expose library
 	window._v = vertic;
-})()
+})();

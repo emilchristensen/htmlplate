@@ -43,23 +43,24 @@
     };
     _Log.prototype.write = function(arg,forceDebug){
       var orgArg = arg;
-      if (this.meta) {
-        arg = {
-          log: this.name,
-          arg: orgArg,
-          datetime: (function(){ return new Date().getTime()})(),
-          type: typeof arg,
-          string: arg.toString()
-        };
-      }
-      this.history.push(arg); // Push object to internal log
-      try { console.log(arg) } catch(err) { } // Try native console, but fail silently.
-      if (this.debug || typeof forceDebug !== 'undefined') { alert('Console call: ' + orgArg) } // Make loud debugging noises
-      if (this.domConsole === true && this.canDoDomConsole === true) { // Call to very basic DOM based console for browsers with no native console
-        if (typeof this.domConsoleElems !== 'object') this.setupDomConsole();
-        this.domConsoleElems.container.append(this.domConsoleElems.item.clone().text(this.meta ? arg.datetime + ' - ' + arg.type + ' : ' + arg.string : orgArg));
-      }
-      return arg;
+      
+      // Add metadata
+      arg = this.addMeta(arg);
+      
+      // Push object to internal log
+      this.history.push(arg); 
+      
+      // Try native console, but fail silently
+      try { console.log(arg) } catch(err) { } 
+      
+      // Make loud debugging noises
+      if (this.debug || typeof forceDebug !== 'undefined') { alert('Log: ' + orgArg) } 
+      
+      // Call to very basic DOM based console for browsers with no native console
+      this.callDomConsole(arg);
+      
+      // Return base argument
+      return orgArg;
     };
     _Log.prototype.setupDomConsole = function(){
       if (this.canDoDomConsole) {
@@ -69,38 +70,59 @@
         };
       }
     };
+    _Log.prototype.callDomConsole = function(arg){
+      if (this.domConsole === true && this.canDoDomConsole === true) { 
+        if (typeof this.domConsoleElems !== 'object') this.setupDomConsole();
+        this.domConsoleElems.container.append(this.domConsoleElems.item.clone().text(this.meta ? arg.datetime + ' - ' + arg.type + ' : ' + arg.string : arg));
+      }
+    };
+    _Log.prototype.addMeta = function(arg){
+      return this.meta ? { arg: arg, datetime: (function(){ return new Date().getTime()})(), log: this.name, string: arg.toString(), type: typeof arg } : arg ;
+    };
     vertic.utils.log = _Log;
     
     // Error handling - inherits from log
     var _Error = function(){
     };
     _Error.prototype = new _Log();
-    _Error.prototype.constructor = Error;
     _Error.prototype.parent = _Log.prototype;
     _Error.prototype.write = function(arg,status,msg,die){
+      var orgArg = arg;
+      
       // Set optional parameters
-      if (typeof status === 'undefined') var status = 'unknown';
-      if (typeof msg === 'undefined') var msg = '';
+      if (typeof status === 'undefined') status = 'unknown';
+      if (typeof msg === 'undefined') msg = '';
+      if (typeof die !== 'boolean') die = false;
       
-      // TODO: Service call?
+      // Add metadata
+      arg = this.addMeta(arg);
+      if (this.meta) {
+        arg.error = true;
+        arg.errorType = status.toString();
+        arg.errorMsg = msg.toString();
+      }
       
-      // Do base class call
-      var r = this.parent.write.call(this,{
-        error:true,
-        errorType:status.toString(),
-        arg: arg
-      });
+      // Push object to internal log
+      this.history.push(arg); 
       
       // Throw JS error if needed or simple warning if possible
       if (die) {
         throw new Error(status+': '+msg);
       } else {
-        try { console.warn(status+': '+msg); } catch(err) {}
+        try { console.warn(status+': '+msg); console.warn(arg); } catch(err) {}
       }
       
-      // Return value
-      return r;
-    }
+      // Make loud debugging noises
+      if (this.debug || typeof forceDebug !== 'undefined') { alert('Error: ' + orgArg) } 
+      
+      // Call to very basic DOM based console for browsers with no native console
+      this.callDomConsole(arg);
+      
+      // TODO: Service call?
+      
+      // Return base argument
+      return orgArg;
+    };
     vertic.utils.error = _Error;
     
     // Remote script loading
@@ -136,13 +158,13 @@
     };
     vertic.utils.loadRemoteScript = loadRemoteScript;
   
-  // Internal instances and short cuts
+  // Internal instances and shortcuts
   vertic.internal = new Object();
   vertic.internal.log = new _Log();
   vertic.internal.error = new _Error();
-  vertic.log = function(){ return vertic.internal.log.write(arguments); };
-  vertic.err = function(){ return vertic.internal.error.write(arguments); };
+  vertic.log = function(){ return vertic.internal.log.write.apply(vertic.internal.log,arguments); };
+  vertic.err = function(){ return vertic.internal.error.write.apply(vertic.internal.error,arguments); };
   
   // Expose libraryt
   window._v = vertic;
-})()
+})();
