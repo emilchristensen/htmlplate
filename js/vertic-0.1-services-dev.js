@@ -12,7 +12,8 @@
 	var vertic = window._v;
 	
 	// Hook in to 3rd party libs
-	var $ = typeof jQuery !== 'undefined' ? jQuery : typeof window.jQuery !== 'undefined' ? window.jQuery : false;
+  var jQuery = typeof jQuery !== 'undefined' ? jQuery : typeof window.jQuery !== 'undefined' ? window.jQuery : false;
+  var $ = jQuery;
 	
 	// Set up service utilities
 	vertic.services = {

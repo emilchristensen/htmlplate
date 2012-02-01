@@ -12,7 +12,8 @@
   var vertic = new Object();
   
   // Hook in to 3rd party libs
-  var $ = typeof jQuery !== 'undefined' ? jQuery : typeof window.jQuery !== 'undefined' ? window.jQuery : false;
+  var jQuery = typeof jQuery !== 'undefined' ? jQuery : typeof window.jQuery !== 'undefined' ? window.jQuery : false;
+  var $ = jQuery;
   
   // Utilities
   vertic.utils = new Object();
