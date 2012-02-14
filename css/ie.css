@@ -1,10 +1,14 @@
 ﻿@charset "utf-8";
-/* 
-  Project name
-  -------------
-  IE Compatability Hacks
+/**
+ * Internet Explorer compatability hacks
+ * 
+ * IE hacks
+ *
+ * @section		1.4			Hacks
+ * @author						ldeleuran
+ * @version						1.0
+ * @since							1.0
 */
-
 /*=IE7*/
 *:first-child+html {}
 *:first-child+html .group { min-height: 1px; }

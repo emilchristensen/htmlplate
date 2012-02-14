@@ -10,48 +10,48 @@
  * @since							1.0
 */
 html {
-  overflow-y:scroll;
-  font-size:62.5%;
+	overflow-y:scroll;
+	font-size:62.5%;
 }
 body {
-  font-family:Arial, Helvetica, Verdana, sans-serif;
+	font-family:Arial, Helvetica, Verdana, sans-serif;
 }
 .group:after {
-  content:"."; 
-  display:block; 
-  height:0; 
-  clear:both; 
-  visibility:hidden;
+	content:"."; 
+	display:block; 
+	height:0; 
+	clear:both; 
+	visibility:hidden;
 }
 b, strong {
-  font-weight:bold;
+	font-weight:bold;
 }
 i, em {
-  font-style:italic;
+	font-style:italic;
 }
 a {
-  color:blue;
-  text-decoration:none;
+	color:blue;
+	text-decoration:none;
 }
 mark a {
-  color:white;
-  background:blue;
+	color:white;
+	background:blue;
 }
 a:hover {
-  text-decoration:underline;
+	text-decoration:underline;
 }
 a:active {
-  color:#000;
+	color:#000;
 }
 h1, h2, h3, h4, h5, h6 {
-  font-weight:bold;
+	font-weight:bold;
 }
 abbr {
-  border-bottom:1px dotted #333;
-  cursor:help;
+	border-bottom:1px dotted #333;
+	cursor:help;
 }
 img, embed, object, video {
-  max-width: 100%;
+	max-width: 100%;
 }
 ::-moz-selection { background: blue; color: #fff; text-shadow: none; }
 ::selection { background: blue; color: #fff; text-shadow: none; }
