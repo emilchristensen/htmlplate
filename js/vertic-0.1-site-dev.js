@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Vertic JS - Site functional wrapper
  * http://labs.vertic.com
  *

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Vertic JS utility library - Core
  * http://labs.vertic.com
  *

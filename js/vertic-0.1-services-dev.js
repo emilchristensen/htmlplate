@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Vertic JS utility library - Services
  * http://labs.vertic.com
  *
