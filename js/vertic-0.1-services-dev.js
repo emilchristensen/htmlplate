@@ -20,7 +20,7 @@
 		request:function(url,data,win,lose) {
 			if (typeof data !== 'object') data = {};
 			if (typeof win === 'undefined') var win = function(resp){ _v.log(resp); };
-			if (typeof lose === 'undefined') var lose = function(resp){ _v.err(resp, 'Service error', jqxhr.responseText); };
+			if (typeof lose === 'undefined') var lose = function(resp,jqxhr){ _v.err(resp, 'Service error', jqxhr.responseText); };
 			$.ajax({
 				url:url,
 				data:JSON.stringify(data),
