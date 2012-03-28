@@ -148,15 +148,18 @@ if (typeof window.JSON === "undefined") {
 					return rv;
 				}();
 				
-				if ((ieVersion==-1) || (ieVersion>8 && document.compatMode != 'BackCompat')) {
-					script.onload = callback;
-				} else {
-					var loadFunction = function(){
-						if (this.readyState == 'complete' || this.readyState == 'loaded') {
-							callback(); 
-						}
-					};
-					script.onreadystatechange = loadFunction;
+				
+				if (typeof callback === 'function') {
+					if ((ieVersion==-1) || (ieVersion>8 && document.compatMode != 'BackCompat')) {
+						script.onload = callback;
+					} else {
+						var loadFunction = function(){
+							if (this.readyState == 'complete' || this.readyState == 'loaded') {
+								callback(); 
+							}
+						};
+						script.onreadystatechange = loadFunction;
+					}
 				}
 				head.appendChild(script);
 			}
