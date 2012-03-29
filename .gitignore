@@ -1,0 +1,27 @@
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Stuff #
+############
+*.mp4
+*.ogv
+*.webm
+js/mathjax/
+js/tinymce/
+js/video-js/
+js/raphael/
