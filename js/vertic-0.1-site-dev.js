@@ -13,7 +13,7 @@
 	// Hook in to 3rd party libs and make "normal" variable names available
   var jQuery = typeof jQuery !== 'undefined' ? jQuery : typeof window.jQuery !== 'undefined' ? window.jQuery : false;
   var $ = jQuery;
-  var Modernizr = typeof Modernizr !== 'undefined' ? jQuery : typeof window.Modernizr !== 'undefined' ? window.Modernizr : false;
+  var Modernizr = typeof Modernizr !== 'undefined' ? Modernizr : typeof window.Modernizr !== 'undefined' ? window.Modernizr : false;
   
   // Site init function - added to Vertic lib to make available in global scope without cluttering the namespace
   _v.init = function(){
