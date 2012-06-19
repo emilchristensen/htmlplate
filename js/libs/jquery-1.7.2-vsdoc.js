@@ -39,7 +39,6 @@
 * Copyright 2010, The Dojo Foundation
 * Released under the MIT and BSD Licenses.
 */
-
 (function (window, undefined) {
     var jQuery = function (selector, context) {
         /// <summary>
