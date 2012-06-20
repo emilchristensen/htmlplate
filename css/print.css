@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Print styles for @media print
  * 
  * Print styles
@@ -9,6 +9,6 @@
  * @since							1.0
 */
 a[href]:after {
-	content: " (" attr(href) ") ";
-	font-size: 90%;
-}
+  content: " (" attr(href) ") ";
+  font-size: 90%; }
+

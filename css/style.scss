@@ -1,0 +1,17 @@
+﻿/**
+ * Main project stylesheet combiner
+ * 
+ * Project name
+ *
+ * @section		1.0			Baseline
+ * @author						ldeleuran
+ * @version						1.0
+ * @since						1.0
+*/
+/* Include framework and normalization */
+@import "framework/framework.scss";
+@import "framework/vars.scss";
+@import "framework/normalize.scss";
+
+/* Include modules */
+@import "modules/baseline.scss";
