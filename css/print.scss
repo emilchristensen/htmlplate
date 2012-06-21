@@ -1,0 +1,14 @@
+﻿/**
+ * Print styles for @media print
+ * 
+ * Print styles
+ *
+ * @section		1.5			Print
+ * @author						ldeleuran
+ * @version						1.0
+ * @since							1.0
+*/
+a[href]:after {
+	content: " (" attr(href) ") ";
+	font-size: 90%;
+}
