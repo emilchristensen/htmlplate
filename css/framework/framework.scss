@@ -1,0 +1,60 @@
+﻿/**
+ * Mixins for browser alignment
+ * 
+ * Vertic base
+ *
+ * @section		      Framework
+ * @author          echristensen
+*/
+@mixin horizontal-gradient($topColor, $bottomColor, $fallbackColor) {
+	background-color: $fallbackColor;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($topColor), to($bottomColor));
+	background-image: -webkit-linear-gradient(top, $topColor, $bottomColor);
+	background-image:    -moz-linear-gradient(top, $topColor, $bottomColor);
+	background-image:     -ms-linear-gradient(top, $topColor, $bottomColor);
+	background-image:      -o-linear-gradient(top, $topColor, $bottomColor);
+	background-image:         linear-gradient(to bottom, $topColor, $bottomColor);
+}
+
+@mixin box-shadow($input) {
+	-webkit-box-shadow: $input;
+					box-shadow: $input;
+}
+
+@mixin transition($input) {
+	     -o-transition: $input;
+	    -ms-transition: $input;
+	   -moz-transition: $input;
+	-webkit-transition: $input;
+					transition: $input;
+}
+
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+					border-radius: $radius;
+
+	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+}
+
+@mixin box-sizing($box-model) {
+	-moz-box-sizing: $box-model;
+	 -ms-box-sizing: $box-model;
+	     box-sizing: $box-model;
+}
+
+@mixin font-size($size) {
+	font-size:#{$size}px;
+	font-size:#{$size/10}rem;
+}
+
+@mixin clearfix-after {
+	&:after {
+		content: ".";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+	.ie7 & { min-height: 1px; }
+	.ie6 & { height: 1%; }
+}
